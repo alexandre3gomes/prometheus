@@ -1,0 +1,23 @@
+global:
+  scrape_interval: 30s
+  scrape_timeout: 10s
+
+rule_files:
+  - alert.yml
+
+scrape_configs:
+  - job_name: prometheus
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'prometheus:9090'
+  - job_name: api
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+          - 'api:8089'
+remote_write:
+- url: https://prometheus-us-central1.grafana.net/api/prom/push
+  basic_auth:
+    username: 54533
+    password: eyJrIjoiMmQzMzZlNDQ0MGExMWYwMmQyOWMyM2U3MTI2ZTY4OWIxMzc1YmY1MiIsIm4iOiJQcm9tZXRoZXVzIiwiaWQiOjQ3MDEzMH0=

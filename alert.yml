@@ -1,0 +1,6 @@
+groups:
+  - name: ApiAlert
+    rules:
+      - alert: InstanceDown 
+        expr: up{job="api"} < 1 
+        for: 5m 
